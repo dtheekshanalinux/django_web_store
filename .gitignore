@@ -11,6 +11,7 @@ test/
 .Python
 env/
 build/
+dstore/
 develop-eggs/
 dist/
 downloads/
