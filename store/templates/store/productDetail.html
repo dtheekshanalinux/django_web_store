@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <main class="container">
+
+      <!-- Left Column / Headphones Image -->
+      <div class="left-column">
+        <img data-image="red" style="height:100%;" class="thumbnail" src="{{product.imageURL}}">
+        <!--<img data-image="blue" src="images/blue.png" alt=""-->
+        <!--<img data-image="red" class="active" src="images/red.png" alt="">-->
+      </div>
+
+
+      <!-- Right Column -->
+      <div class="right-column">
+
+        <!-- Product Description -->
+        <div class="product-description">
+	  <h1><strong>{{product.name}}</strong></h1>
+    <div class="product-price">
+			<strong>
+				<span>Rs {{product.price}}</span>
+			</strong>
+          <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+        </div>
+          <p>{{ product.desc|safe}}</p>
+        </div>
+    </main>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <!-- Scripts -->
+	{% endblock content %}

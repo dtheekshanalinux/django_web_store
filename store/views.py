@@ -14,7 +14,18 @@ def store(request):
 
 	products = Product.objects.all()
 	context = {'products':products, 'cartItems':cartItems}
-	return render(request, 'store/store.html', context)
+	return render(request, 'store/store.html', context) 
+
+def productDetail(request, id):
+	data = cartData(request)
+
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+
+	product = Product.objects.get(id=id)
+	context = {'cartItems':cartItems, 'product': product,}
+	return render(request, 'store/productDetail.html', context)
 
 
 def cart(request):
@@ -36,7 +47,7 @@ def checkout(request):
 
 	context = {'items':items, 'order':order, 'cartItems':cartItems}
 	return render(request, 'store/checkout.html', context)
-
+	
 def updateItem(request):
 	data = json.loads(request.body)
 	productId = data['productId']
@@ -57,7 +68,7 @@ def updateItem(request):
 
 	orderItem.save()
 
-	if orderItem.quantity <= 0:
+	if orderItem.quantity <= 0: # this used to if order item is 0 then delete the order item
 		orderItem.delete()
 
 	return JsonResponse('Item was added', safe=False)
@@ -90,3 +101,4 @@ def processOrder(request):
 		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
